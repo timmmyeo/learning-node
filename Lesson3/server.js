@@ -1,5 +1,6 @@
 const http = require('http');
 const fs = require('fs');
+const _ = require('lodash');
 
 // if you need web sockets, you can store the server
 // const server = http.createServer((req, res) => {
@@ -24,7 +25,18 @@ const fs = require('fs');
 //   });
 
 const server = http.createServer((req, res) => {
-  console.log('request made');
+  // lodash, get random number between 0 and 20
+  const num = _.random(0, 20);
+
+  const greet = _.once(() => {
+    console.log('hello!');
+  })
+
+  // greets only runs once
+  greet();
+  greet();
+
+  console.log('request made ', num);
   console.log('request: ', req.url, ' method: ', req.method);
 
   // set header content type
